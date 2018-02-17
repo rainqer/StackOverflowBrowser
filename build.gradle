@@ -22,9 +22,14 @@ task clean(type: Delete) {
 }
 
 ext {
+    daggerVersion = '2.2'
     mvp_version = '1.1.14'
 
     infullMvp = "com.infullmobile.android:infullmvp-kotlin:$mvp_version"
     kotlinLib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     appcompat = 'com.android.support:appcompat-v7:26.1.0'
+
+    // DI
+    dagger = "com.google.dagger:dagger:$daggerVersion"
+    daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
 }
