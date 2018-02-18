@@ -24,6 +24,9 @@ task clean(type: Delete) {
 ext {
     daggerVersion = '2.2'
     mvp_version = '1.1.14'
+    okHttpVersion = '3.9.1'
+    retrofitCallAdapterVersion = "1.0.0"
+    retrofitVersion = '2.3.0'
 
     infullMvp = "com.infullmobile.android:infullmvp-kotlin:$mvp_version"
     kotlinLib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -34,6 +37,15 @@ ext {
     // DI
     dagger = "com.google.dagger:dagger:$daggerVersion"
     daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    // NETWORK
+    gson = 'com.google.code.gson:gson:2.8.0'
+    okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    okHttpLogging = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    retrofitGson = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    retrofitRx = "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    retrofitCallAdapter = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitCallAdapterVersion"
 
     // TESTS
     infullMvpTest = "com.infullmobile.android:infullmvp-kotlin-basetest:$mvp_version"
