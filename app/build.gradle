@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    testOptions.unitTests.includeAndroidResources true
     compileSdkVersion 26
     defaultConfig {
         applicationId "org.rhinoonabus.stackoverflowbrowser"
@@ -11,7 +12,6 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -30,8 +30,14 @@ dependencies {
     implementation appcompat
     implementation infullMvp
     implementation kotlinLib
+    implementation rxAppcompat
+    implementation rxJava2
 
     // DI
     implementation dagger
     kapt daggerCompiler
+
+    // TESTS
+    testImplementation infullMvpTest
+    testImplementation mockitoKotlin
 }

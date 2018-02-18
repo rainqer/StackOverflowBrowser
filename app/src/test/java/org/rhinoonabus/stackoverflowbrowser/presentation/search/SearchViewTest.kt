@@ -1,0 +1,40 @@
+package org.rhinoonabus.stackoverflowbrowser.presentation.search
+
+import com.infullmobile.android.infullmvp.basetest.InFullMvpActivityBaseTest
+import com.nhaarman.mockito_kotlin.mock
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchView.Companion.QUERY_DELAY_TIME_IN_SECONDS
+import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModule
+import org.robolectric.RobolectricTestRunner
+import java.util.concurrent.TimeUnit
+
+@RunWith(RobolectricTestRunner::class)
+class SearchViewTest: InFullMvpActivityBaseTest<SearchActivity, SearchPresenter, SearchView>() {
+
+    override val testActivityClass = SearchActivity::class.java
+    val mockedPresenter = mock<SearchPresenter>()
+
+    @Test
+    fun shouldProvideStreamWithChangedQueryValuesWithDelay() {
+        // given
+        val testText = "testText"
+        val testedStream = testedView.queryTextChanges.test()
+
+        // when
+        testedView.searchView.setQuery(testText, false)
+
+        // then
+        testedStream.await(QUERY_DELAY_TIME_IN_SECONDS, TimeUnit.SECONDS)
+        testedStream.assertValue(testText)
+    }
+
+    override fun substituteModules(activity: SearchActivity) {
+        activity.searchGraph.setSearchModule(TestSearchModule())
+    }
+
+    inner class TestSearchModule: SearchModule() {
+
+        override fun providesSearchPresenter(view: SearchView) = mockedPresenter
+    }
+}
