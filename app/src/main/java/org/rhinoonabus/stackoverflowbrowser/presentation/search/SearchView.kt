@@ -15,17 +15,27 @@ open class SearchView : PresentedActivityView<SearchPresenter>() {
 
     val searchView: SearchView by bindView(R.id.searchView)
 
-    open val queryTextChanges: Observable<CharSequence>
+    open val queryTextChanges: Observable<String>
         get() = searchView
                 .queryTextChanges()
                 .skipInitialValue()
                 .debounce(QUERY_DELAY_TIME_IN_SECONDS, TimeUnit.SECONDS)
+                .map { it.toString() }
 
     override fun onViewsBound() {
         // NO-OP
     }
 
+    open fun displayGitHubResultsForPhrase(results: List<String>) {
+        // NO-OP
+    }
+
+    open fun displayError(error: Throwable) {
+        // NO-OP
+    }
+
     companion object {
         const val QUERY_DELAY_TIME_IN_SECONDS = 2L
+
     }
 }

@@ -6,7 +6,7 @@ import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchPresenter
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchView
 
 @Module
-open class SearchModule() {
+open class SearchModule {
 
     @SearchScope
     @Provides
@@ -14,7 +14,12 @@ open class SearchModule() {
 
     @SearchScope
     @Provides
+    open fun providesSearchModel() = SearchModel()
+
+    @SearchScope
+    @Provides
     open fun providesSearchPresenter(
-            view: SearchView
-    ) = SearchPresenter(view)
+            view: SearchView,
+            model: SearchModel
+    ) = SearchPresenter(view, model)
 }

@@ -5,6 +5,7 @@ import com.nhaarman.mockito_kotlin.mock
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchView.Companion.QUERY_DELAY_TIME_IN_SECONDS
+import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModel
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModule
 import org.robolectric.RobolectricTestRunner
 import java.util.concurrent.TimeUnit
@@ -14,6 +15,7 @@ class SearchViewTest: InFullMvpActivityBaseTest<SearchActivity, SearchPresenter,
 
     override val testActivityClass = SearchActivity::class.java
     val mockedPresenter = mock<SearchPresenter>()
+    val mockedModel = mock<SearchModel>()
 
     @Test
     fun shouldProvideStreamWithChangedQueryValuesWithDelay() {
@@ -35,6 +37,8 @@ class SearchViewTest: InFullMvpActivityBaseTest<SearchActivity, SearchPresenter,
 
     inner class TestSearchModule: SearchModule() {
 
-        override fun providesSearchPresenter(view: SearchView) = mockedPresenter
+        override fun providesSearchPresenter(view: SearchView, model:SearchModel) = mockedPresenter
+
+        override fun providesSearchModel() = mockedModel
     }
 }
