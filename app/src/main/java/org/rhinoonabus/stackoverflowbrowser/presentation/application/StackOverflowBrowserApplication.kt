@@ -8,6 +8,8 @@ class StackOverflowBrowserApplication: Application() {
         super.onCreate()
         DaggerStackOverflowBrowserApplicationComponent
                 .builder()
+                .repositoriesModule(RepositoriesModule())
+                .useCasesModule(UseCasesModule())
                 .gitHubClientModule(GitHubClientModule())
                 .build()
     }
