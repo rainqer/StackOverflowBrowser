@@ -18,5 +18,4 @@ class GitHubSourceCodeManagementRepository(
     companion object {
         const val RESULTS_PER_PAGE = 10
     }
-
 }
