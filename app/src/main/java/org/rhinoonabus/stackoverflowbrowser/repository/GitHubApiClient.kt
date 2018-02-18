@@ -12,5 +12,5 @@ interface GitHubApiClient {
     fun searchForRepositories(
             @Query("q") queryPhrase: String,
             @Query("per_page") resultsOnPage: Int
-    ): Single<List<GitHubRepositoryEntity>>
+    ): Single<GitHubSearchForRepositoriesResponseEntity>
 }

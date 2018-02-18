@@ -11,7 +11,7 @@ class GitHubSourceCodeManagementRepository(
 
     override fun searchForCodeRepositories(searchPhrase: String): Single<List<CodeRepository>> =
             gitHubClient.searchForRepositories(searchPhrase, RESULTS_PER_PAGE)
-                    .flatMapObservable { Observable.fromIterable(it) }
+                    .flatMapObservable { Observable.fromIterable(it.items) }
                     .map { CodeRepository(it) }
                     .toList()
 
