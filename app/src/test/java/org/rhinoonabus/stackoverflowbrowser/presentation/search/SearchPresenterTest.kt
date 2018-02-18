@@ -7,6 +7,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import org.junit.Test
+import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryFactory
 
 class SearchPresenterTest {
 
@@ -21,7 +22,7 @@ class SearchPresenterTest {
     fun shouldDisplayResultsFromModelWhenSearchPhraseInViewChangesAfterPresenterBound() {
         // given
         val testPhrase = "testPhrase"
-        val phraseQueryResults = listOf("testResults")
+        val phraseQueryResults = listOf(CodeRepositoryFactory.REPOSITORY_A)
         whenever(mockedSearchModel.queryForPhrase(testPhrase)).thenReturn(Single.just(phraseQueryResults))
         presenter.bind(Bundle(), Bundle(), null)
 

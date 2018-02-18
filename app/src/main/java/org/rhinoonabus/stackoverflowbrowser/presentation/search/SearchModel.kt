@@ -1,8 +1,8 @@
 package org.rhinoonabus.stackoverflowbrowser.presentation.search
 
-import io.reactivex.Single
+import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesWithPhraseUseCase
 
-open class SearchModel {
+open class SearchModel(private val searchForRepositoriesWithPhraseUseCase: SearchForRepositoriesWithPhraseUseCase) {
 
-    open fun queryForPhrase(phrase: String) = Single.fromCallable { listOf("exampleResult") }
+    open fun queryForPhrase(phrase: String) = searchForRepositoriesWithPhraseUseCase.searchFor(phrase)
 }

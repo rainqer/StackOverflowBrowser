@@ -6,6 +6,7 @@ import com.infullmobile.android.infullmvp.PresentedActivityView
 import com.jakewharton.rxbinding2.support.v7.widget.queryTextChanges
 import io.reactivex.Observable
 import org.rhinoonabus.stackoverflowbrowser.R
+import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepository
 import java.util.concurrent.TimeUnit
 
 open class SearchView : PresentedActivityView<SearchPresenter>() {
@@ -26,7 +27,7 @@ open class SearchView : PresentedActivityView<SearchPresenter>() {
         // NO-OP
     }
 
-    open fun displayResultsForPhrase(results: List<String>) {
+    open fun displayResultsForPhrase(results: List<CodeRepository>) {
         // NO-OP
     }
 
@@ -36,6 +37,5 @@ open class SearchView : PresentedActivityView<SearchPresenter>() {
 
     companion object {
         const val QUERY_DELAY_TIME_IN_SECONDS = 2L
-
     }
 }

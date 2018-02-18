@@ -4,9 +4,12 @@ import android.app.Application
 
 class StackOverflowBrowserApplication: Application() {
 
+    lateinit var component: StackOverflowBrowserApplicationComponent
+        private set
+
     override fun onCreate() {
         super.onCreate()
-        DaggerStackOverflowBrowserApplicationComponent
+        component = DaggerStackOverflowBrowserApplicationComponent
                 .builder()
                 .repositoriesModule(RepositoriesModule())
                 .useCasesModule(UseCasesModule())
