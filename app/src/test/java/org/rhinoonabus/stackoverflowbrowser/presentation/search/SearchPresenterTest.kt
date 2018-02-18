@@ -19,18 +19,18 @@ class SearchPresenterTest {
     val presenter = SearchPresenter(mockedSearchView, mockedSearchModel)
 
     @Test
-    fun shouldDisplayResultsFromGithubWhenSearchPhraseInViewChangesAfterPresenterBound() {
+    fun shouldDisplayResultsFromModelWhenSearchPhraseInViewChangesAfterPresenterBound() {
         // given
         val testPhrase = "testPhrase"
-        val gitHubResults = listOf("testResults")
-        whenever(mockedSearchModel.queryGitHubForPhrase(testPhrase)).thenReturn(Single.just(gitHubResults))
+        val phraseQueryResults = listOf("testResults")
+        whenever(mockedSearchModel.queryForPhrase(testPhrase)).thenReturn(Single.just(phraseQueryResults))
         presenter.bind(Bundle(), Bundle(), null)
 
         // when
         testPhrasesStream.onNext(testPhrase)
 
         // then
-        verify(mockedSearchView).displayGitHubResultsForPhrase(gitHubResults)
+        verify(mockedSearchView).displayResultsForPhrase(phraseQueryResults)
     }
 
     @Test
@@ -38,7 +38,7 @@ class SearchPresenterTest {
         // given
         val testPhrase = "testPhrase"
         val error = IllegalStateException("testError")
-        whenever(mockedSearchModel.queryGitHubForPhrase(testPhrase)).thenReturn(Single.error(error))
+        whenever(mockedSearchModel.queryForPhrase(testPhrase)).thenReturn(Single.error(error))
         presenter.bind(Bundle(), Bundle(), null)
 
         // when

@@ -26,7 +26,7 @@ open class SearchView : PresentedActivityView<SearchPresenter>() {
         // NO-OP
     }
 
-    open fun displayGitHubResultsForPhrase(results: List<String>) {
+    open fun displayResultsForPhrase(results: List<String>) {
         // NO-OP
     }
 
