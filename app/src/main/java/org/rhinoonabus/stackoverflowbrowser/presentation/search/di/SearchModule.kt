@@ -2,6 +2,7 @@ package org.rhinoonabus.stackoverflowbrowser.presentation.search.di
 
 import dagger.Module
 import dagger.Provides
+import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchModel
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchPresenter
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchView
 

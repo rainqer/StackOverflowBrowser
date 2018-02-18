@@ -1,4 +1,4 @@
-package org.rhinoonabus.stackoverflowbrowser.presentation.search.di
+package org.rhinoonabus.stackoverflowbrowser.presentation.search
 
 import io.reactivex.Single
 

@@ -7,7 +7,6 @@ import com.nhaarman.mockito_kotlin.whenever
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import org.junit.Test
-import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModel
 
 class SearchPresenterTest {
 

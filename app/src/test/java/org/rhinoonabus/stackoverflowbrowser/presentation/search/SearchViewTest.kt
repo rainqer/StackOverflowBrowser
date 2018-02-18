@@ -4,7 +4,6 @@ import com.infullmobile.android.infullmvp.basetest.InFullMvpActivityBaseTest
 import com.nhaarman.mockito_kotlin.mock
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModel
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModule
 import org.robolectric.RobolectricTestRunner
 
@@ -35,7 +34,7 @@ class SearchViewTest: InFullMvpActivityBaseTest<SearchActivity, SearchPresenter,
 
     inner class TestSearchModule: SearchModule() {
 
-        override fun providesSearchPresenter(view: SearchView, model:SearchModel) = mockedPresenter
+        override fun providesSearchPresenter(view: SearchView, model: SearchModel) = mockedPresenter
 
         override fun providesSearchModel() = mockedModel
     }
