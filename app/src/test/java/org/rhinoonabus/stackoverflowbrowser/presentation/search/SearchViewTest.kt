@@ -4,11 +4,9 @@ import com.infullmobile.android.infullmvp.basetest.InFullMvpActivityBaseTest
 import com.nhaarman.mockito_kotlin.mock
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchView.Companion.QUERY_DELAY_TIME_IN_SECONDS
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModel
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModule
 import org.robolectric.RobolectricTestRunner
-import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
 class SearchViewTest: InFullMvpActivityBaseTest<SearchActivity, SearchPresenter, SearchView>() {
@@ -27,7 +25,7 @@ class SearchViewTest: InFullMvpActivityBaseTest<SearchActivity, SearchPresenter,
         testedView.searchView.setQuery(testText, false)
 
         // then
-        testedStream.await(QUERY_DELAY_TIME_IN_SECONDS, TimeUnit.SECONDS)
+        testedStream.awaitCount(1)
         testedStream.assertValue(testText)
     }
 
