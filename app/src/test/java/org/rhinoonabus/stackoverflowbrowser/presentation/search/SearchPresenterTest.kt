@@ -32,4 +32,19 @@ class SearchPresenterTest {
         // then
         verify(mockedSearchView).displayGitHubResultsForPhrase(gitHubResults)
     }
+
+    @Test
+    fun shouldDisplayErrorWhenModelReturnsErrorForSearchPhrase() {
+        // given
+        val testPhrase = "testPhrase"
+        val error = IllegalStateException("testError")
+        whenever(mockedSearchModel.queryGitHubForPhrase(testPhrase)).thenReturn(Single.error(error))
+        presenter.bind(Bundle(), Bundle(), null)
+
+        // when
+        testPhrasesStream.onNext(testPhrase)
+
+        // then
+        verify(mockedSearchView).displayError(error)
+    }
 }

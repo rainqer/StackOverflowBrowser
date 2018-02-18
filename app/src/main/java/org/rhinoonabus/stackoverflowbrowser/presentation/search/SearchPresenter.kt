@@ -13,6 +13,9 @@ open class SearchPresenter(
     override fun bind(intentBundle: Bundle, savedInstanceState: Bundle, intentData: Uri?) {
         presentedView.queryTextChanges
                 .flatMapSingle { phrase -> model.queryGitHubForPhrase(phrase) }
-                .subscribe { results -> presentedView.displayGitHubResultsForPhrase(results) }
+                .subscribe (
+                        { results -> presentedView.displayGitHubResultsForPhrase(results) },
+                        { error -> presentedView.displayError(error) }
+                )
     }
 }
