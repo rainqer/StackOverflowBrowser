@@ -3,6 +3,7 @@ package org.rhinoonabus.stackoverflowbrowser.repository
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepository
+import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryUser
 import org.rhinoonabus.stackoverflowbrowser.domain.SourceCodeManagementRepository
 
 class GitHubSourceCodeManagementRepository(
@@ -13,6 +14,12 @@ class GitHubSourceCodeManagementRepository(
             gitHubClient.searchForRepositories(searchPhrase, RESULTS_PER_PAGE)
                     .flatMapObservable { Observable.fromIterable(it.items) }
                     .map { CodeRepository(it) }
+                    .toList()
+
+    override fun searchUsers(searchPhrase: String): Single<List<CodeRepositoryUser>> =
+            gitHubClient.searchForUsers(searchPhrase, RESULTS_PER_PAGE)
+                    .flatMapObservable { Observable.fromIterable(it.items) }
+                    .map { CodeRepositoryUser(it) }
                     .toList()
 
     companion object {

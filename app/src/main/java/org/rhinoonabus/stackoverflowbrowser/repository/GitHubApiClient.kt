@@ -13,4 +13,11 @@ interface GitHubApiClient {
             @Query("q") queryPhrase: String,
             @Query("per_page") resultsOnPage: Int
     ): Single<GitHubSearchForRepositoriesResponseEntity>
+
+    @Headers("Accept: application/vnd.github.v3+json", "Content-Type: application/json")
+    @GET("search/users")
+    fun searchForUsers(
+            @Query("q") queryPhrase: String,
+            @Query("per_page") resultsOnPage: Int
+    ): Single<GitHubSearchForRepositoryUsersResponseEntity>
 }
