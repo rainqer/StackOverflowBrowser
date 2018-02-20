@@ -4,14 +4,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import org.rhinoonabus.stackoverflowbrowser.R
-import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepository
+import org.rhinoonabus.stackoverflowbrowser.domain.SearchResultItem
 import java.util.ArrayList
 
 open class SearchResultsAdapter: RecyclerView.Adapter<SearchResultViewHolder>() {
 
-    private val data: ArrayList<CodeRepository> = ArrayList()
+    private val data: ArrayList<SearchResultItem> = ArrayList()
 
-    open fun setData(newData: List<CodeRepository>) {
+    open fun setData(newData: List<SearchResultItem>) {
         if (data != newData) {
             data.clear()
             data.addAll(newData)

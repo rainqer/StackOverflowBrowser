@@ -1,18 +1,20 @@
 package org.rhinoonabus.stackoverflowbrowser.domain
 
+import org.rhinoonabus.stackoverflowbrowser.R
 import org.rhinoonabus.stackoverflowbrowser.repository.GitHubRepositoryEntity
 
 data class CodeRepository(
-        val id: Long,
-        val name: String,
+        override val id: Long,
+        override val name: String,
+        override val url: String,
         val description: String,
-        val url: String
-) {
+        override val typeNameRes: Int = R.string.codeRepositoryTypeName
+) : SearchResultItem {
 
     constructor(gitHubCodeRepositoryEntity: GitHubRepositoryEntity) : this(
             gitHubCodeRepositoryEntity.id ?: throw IllegalStateException("Every repository must have an id"),
             gitHubCodeRepositoryEntity.name ?: "",
-            gitHubCodeRepositoryEntity.description ?: "",
-            gitHubCodeRepositoryEntity.url ?: ""
+            gitHubCodeRepositoryEntity.url ?: "",
+            gitHubCodeRepositoryEntity.description ?: ""
     )
 }

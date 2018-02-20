@@ -8,7 +8,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.rhinoonabus.stackoverflowbrowser.R
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryFactory
-import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesWithPhraseUseCase
+import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesOrUsersWithPhraseUseCase
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.di.SearchModule
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowToast
@@ -68,7 +68,7 @@ class SearchViewTest: InFullMvpActivityBaseTest<SearchActivity, SearchPresenter,
         override fun providesSearchPresenter(view: SearchView, model: SearchModel) = mockedPresenter
 
         override fun providesSearchModel(
-                searchForRepositoriesWithPhraseUseCase: SearchForRepositoriesWithPhraseUseCase
+                searchForRepositoriesWithPhraseUseCase: SearchForRepositoriesOrUsersWithPhraseUseCase
         ) = mockedModel
 
         override fun providesSearchResultsAdapter() = mockedAdapter

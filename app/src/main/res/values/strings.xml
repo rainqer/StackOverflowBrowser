@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Stack Overflow Browser</string>
     <string name="general_error">Something went wrong</string>
-    <string name="repository_name_label">name:</string>
-    <string name="repository_description_label">desc:</string>
-    <string name="repository_url_label">url:</string>
+    <string name="type_label">type:</string>
+    <string name="name_label">name:</string>
+    <string name="url_label">url:</string>
+    <string name="codeRepositoryTypeName">Repository</string>
+    <string name="codeRepositoryUserTypeName">User</string>
 </resources>

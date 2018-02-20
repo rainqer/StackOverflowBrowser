@@ -2,7 +2,7 @@ package org.rhinoonabus.stackoverflowbrowser.presentation.search.di
 
 import dagger.Module
 import dagger.Provides
-import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesWithPhraseUseCase
+import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesOrUsersWithPhraseUseCase
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchModel
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchPresenter
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchResultsAdapter
@@ -22,7 +22,7 @@ open class SearchModule {
     @SearchScope
     @Provides
     open fun providesSearchModel(
-            searchForRepositoriesWithPhraseUseCase: SearchForRepositoriesWithPhraseUseCase
+            searchForRepositoriesWithPhraseUseCase: SearchForRepositoriesOrUsersWithPhraseUseCase
     ) = SearchModel(searchForRepositoriesWithPhraseUseCase)
 
     @SearchScope

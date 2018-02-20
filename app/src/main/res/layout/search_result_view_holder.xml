@@ -25,10 +25,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/repository_name_label"/>
+                android:text="@string/type_label"/>
 
             <TextView
-                android:id="@+id/repoName"
+                android:id="@+id/itemType"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>
@@ -44,10 +44,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/repository_description_label"/>
+                android:text="@string/name_label"/>
 
             <TextView
-                android:id="@+id/repoDescription"
+                android:id="@+id/itemName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>
@@ -63,10 +63,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/repository_url_label"/>
+                android:text="@string/url_label"/>
 
             <TextView
-                android:id="@+id/repoUrl"
+                android:id="@+id/itemUrl"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>

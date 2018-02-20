@@ -7,6 +7,8 @@ import org.junit.runner.RunWith
 import org.rhinoonabus.stackoverflowbrowser.R
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryFactory.REPOSITORY_A
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryFactory.REPOSITORY_B
+import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryUserFactory.USER_A
+import org.rhinoonabus.stackoverflowbrowser.domain.SearchResultItem
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 
@@ -28,9 +30,9 @@ class SearchResultsAdapterTest {
     }
 
     @Test
-    fun shouldBindAppropriateDataToViewHolder() {
+    fun shouldBindAppropriateSearchResultDataToViewHolder() {
         // given
-        val testResults = listOf(REPOSITORY_A, REPOSITORY_B)
+        val testResults = listOf<SearchResultItem>(USER_A, REPOSITORY_B)
         val indexToBeBound = 1
         val viewHolder = buildViewHolder()
         searchResultsAdapter.setData(testResults)
@@ -39,9 +41,8 @@ class SearchResultsAdapterTest {
         searchResultsAdapter.onBindViewHolder(viewHolder, indexToBeBound)
 
         // then
-        assertThat(viewHolder.repositoryName.text).isEqualTo(testResults[indexToBeBound].name)
-        assertThat(viewHolder.repositoryDescription.text).isEqualTo(testResults[indexToBeBound].description)
-        assertThat(viewHolder.repositoryUrl.text).isEqualTo(testResults[indexToBeBound].url)
+        assertThat(viewHolder.itemName.text).isEqualTo(testResults[indexToBeBound].name)
+        assertThat(viewHolder.itemUrl.text).isEqualTo(testResults[indexToBeBound].url)
     }
 
     private fun buildViewHolder() = SearchResultViewHolder(inflateViewForViewHolder())

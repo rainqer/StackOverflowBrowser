@@ -9,6 +9,7 @@ import com.jakewharton.rxbinding2.support.v7.widget.queryTextChanges
 import io.reactivex.Observable
 import org.rhinoonabus.stackoverflowbrowser.R
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepository
+import org.rhinoonabus.stackoverflowbrowser.domain.SearchResultItem
 import java.util.concurrent.TimeUnit
 
 open class SearchView(
@@ -32,7 +33,7 @@ open class SearchView(
         listOfResults.adapter = searchResultsAdapter
     }
 
-    open fun displayResultsForPhrase(results: List<CodeRepository>) = searchResultsAdapter.setData(results)
+    open fun displayResultsForPhrase(results: List<SearchResultItem>) = searchResultsAdapter.setData(results)
 
     open fun displayError(error: Throwable) =
             Toast.makeText(context, somethingWentWrongText, Toast.LENGTH_LONG).show()
