@@ -7,13 +7,14 @@ import android.widget.Toast
 import com.infullmobile.android.infullmvp.PresentedActivityView
 import com.jakewharton.rxbinding2.support.v7.widget.queryTextChanges
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import org.rhinoonabus.stackoverflowbrowser.R
-import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepository
 import org.rhinoonabus.stackoverflowbrowser.domain.SearchResultItem
 import java.util.concurrent.TimeUnit
 
 open class SearchView(
-        private val searchResultsAdapter: SearchResultsAdapter
+        private val searchResultsAdapter: SearchResultsAdapter,
+        private val queryTextChangedScheduler: Scheduler
 ) : PresentedActivityView<SearchPresenter>() {
 
     @LayoutRes
@@ -26,7 +27,7 @@ open class SearchView(
         get() = searchView
                 .queryTextChanges()
                 .skipInitialValue()
-                .debounce(QUERY_DELAY_TIME_IN_SECONDS, TimeUnit.SECONDS)
+                .debounce(QUERY_DELAY_TIME_IN_SECONDS, TimeUnit.SECONDS, queryTextChangedScheduler)
                 .map { it.toString() }
 
     override fun onViewsBound() {
@@ -39,6 +40,6 @@ open class SearchView(
             Toast.makeText(context, somethingWentWrongText, Toast.LENGTH_LONG).show()
 
     companion object {
-        const val QUERY_DELAY_TIME_IN_SECONDS = 2L
+        const val QUERY_DELAY_TIME_IN_SECONDS = 1L
     }
 }

@@ -2,6 +2,8 @@ package org.rhinoonabus.stackoverflowbrowser.presentation.search.di
 
 import dagger.Module
 import dagger.Provides
+import io.reactivex.Scheduler
+import io.reactivex.schedulers.Schedulers
 import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesOrUsersWithPhraseUseCase
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchModel
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchPresenter
@@ -17,7 +19,14 @@ open class SearchModule {
 
     @SearchScope
     @Provides
-    open fun providesSearchView(searchResultsAdapter: SearchResultsAdapter) = SearchView(searchResultsAdapter)
+    open fun providesOnQueryTextChangedScheduler(): Scheduler = Schedulers.single()
+
+    @SearchScope
+    @Provides
+    open fun providesSearchView(
+            searchResultsAdapter: SearchResultsAdapter,
+            onQueryTextChangedScheduler: Scheduler
+    ) = SearchView(searchResultsAdapter, onQueryTextChangedScheduler)
 
     @SearchScope
     @Provides
