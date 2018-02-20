@@ -46,6 +46,37 @@ class SearchForRepositoriesOrUsersWithPhraseUseCaseTest {
     }
 
     @Test
+    fun shouldGiveTheSearchResultsSortedByIdInAscendingOrder() {
+        // given
+        val listOfMixedRepositories =
+                listOf(REPOSITORY_A.copy(id = 2), REPOSITORY_A.copy(id = 3), REPOSITORY_A.copy(id = 1))
+        val listOfMixedUsers =
+                listOf(USER_A.copy(id = 12), USER_A.copy(id = 13), USER_A.copy(id = 11))
+
+        val testSearchPhrase = "testPhrase"
+        whenever(mockedSourceCodeManagementRepository.searchForCodeRepositories(testSearchPhrase))
+                .thenReturn(Single.just(listOfMixedRepositories))
+        whenever(mockedSourceCodeManagementRepository.searchUsers(testSearchPhrase))
+                .thenReturn(Single.just(listOfMixedUsers))
+
+        // when
+        val testedState = useCase.searchFor(testSearchPhrase).test()
+
+        // then
+        testScheduler.triggerActions()
+        testedState.awaitTerminalEvent()
+        testedState.assertValue { result ->
+            result.containsAll(listOfMixedRepositories) && result.containsAll(listOfMixedUsers)
+            && result[0].id == 1L
+            && result[1].id == 2L
+            && result[2].id == 3L
+            && result[3].id == 11L
+            && result[4].id == 12L
+            && result[5].id == 13L
+        }
+    }
+
+    @Test
     fun shouldReturnOnlyUsersWhenSearchingForRepositoryByPhraseInTheSourceCodeManagementRepositoryReturnsError() {
         // given
         val testSearchPhrase = "testPhrase"

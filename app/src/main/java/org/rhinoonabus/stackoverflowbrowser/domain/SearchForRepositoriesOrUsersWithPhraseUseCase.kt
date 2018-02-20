@@ -23,5 +23,9 @@ open class SearchForRepositoriesOrUsersWithPhraseUseCase(
 
     private fun combineRepositoriesWithUsers() =
             BiFunction<List<CodeRepository>, List<CodeRepositoryUser>, List<SearchResultItem>>
-            { listOfRepositories, listOfUsers -> (listOfRepositories as List<SearchResultItem>).plus(listOfUsers) }
+            { listOfRepositories, listOfUsers ->
+                (listOfRepositories as List<SearchResultItem>)
+                        .plus(listOfUsers)
+                        .sortedBy { it.id }
+            }
 }
