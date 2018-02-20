@@ -46,7 +46,7 @@ class SearchForRepositoriesOrUsersWithPhraseUseCaseTest {
     }
 
     @Test
-    fun shouldReturnErrorWhenSearchingForRepositoryByPhraseInTheSourceCodeManagementRepositoryReturnsError() {
+    fun shouldReturnOnlyUsersWhenSearchingForRepositoryByPhraseInTheSourceCodeManagementRepositoryReturnsError() {
         // given
         val testSearchPhrase = "testPhrase"
         val error = IllegalStateException("testError")
@@ -60,7 +60,7 @@ class SearchForRepositoriesOrUsersWithPhraseUseCaseTest {
 
         // then
         testScheduler.triggerActions()
-        testedState.assertError(error)
+        testedState.assertValue { result -> result.containsAll(correctSetOfUsers)}
     }
 
     @Test

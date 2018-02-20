@@ -10,10 +10,13 @@ open class SearchForRepositoriesOrUsersWithPhraseUseCase(
         private val sourceCodeManagementRepository: SourceCodeManagementRepository
 ) {
     open fun searchFor(phrase: String): Single<List<SearchResultItem>> =
-            sourceCodeManagementRepository.searchForCodeRepositories(phrase)
+            searchForCodeRepositoriesOrReturnEmptyList(phrase)
                     .zipWith(sourceCodeManagementRepository.searchUsers(phrase), combineRepositoriesWithUsers())
             .subscribeOn(executionScheduler)
             .observeOn(redirectionScheduler)
+
+    private fun searchForCodeRepositoriesOrReturnEmptyList(phrase: String) =
+            sourceCodeManagementRepository.searchForCodeRepositories(phrase).onErrorReturnItem(emptyList())
 
     private fun combineRepositoriesWithUsers() =
             BiFunction<List<CodeRepository>, List<CodeRepositoryUser>, List<SearchResultItem>>
