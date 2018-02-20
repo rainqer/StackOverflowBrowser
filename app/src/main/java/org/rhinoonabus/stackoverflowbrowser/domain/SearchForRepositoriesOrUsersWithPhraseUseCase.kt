@@ -11,12 +11,15 @@ open class SearchForRepositoriesOrUsersWithPhraseUseCase(
 ) {
     open fun searchFor(phrase: String): Single<List<SearchResultItem>> =
             searchForCodeRepositoriesOrReturnEmptyList(phrase)
-                    .zipWith(sourceCodeManagementRepository.searchUsers(phrase), combineRepositoriesWithUsers())
+                    .zipWith(searchForUsersOrReturnEmptyList(phrase), combineRepositoriesWithUsers())
             .subscribeOn(executionScheduler)
             .observeOn(redirectionScheduler)
 
     private fun searchForCodeRepositoriesOrReturnEmptyList(phrase: String) =
             sourceCodeManagementRepository.searchForCodeRepositories(phrase).onErrorReturnItem(emptyList())
+
+    private fun searchForUsersOrReturnEmptyList(phrase: String) =
+            sourceCodeManagementRepository.searchUsers(phrase).onErrorReturnItem(emptyList())
 
     private fun combineRepositoriesWithUsers() =
             BiFunction<List<CodeRepository>, List<CodeRepositoryUser>, List<SearchResultItem>>
