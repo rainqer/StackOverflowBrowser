@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Stack Overflow Browser</string>
+    <string name="general_error">Something went wrong</string>
 </resources>

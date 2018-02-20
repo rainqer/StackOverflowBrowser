@@ -51,6 +51,7 @@ dependencies {
     implementation retrofitCallAdapter
 
     // TESTS
+    testImplementation assertJ
     testImplementation infullMvpTest
     testImplementation mockitoKotlin
 }

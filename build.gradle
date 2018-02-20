@@ -48,6 +48,7 @@ ext {
     retrofitCallAdapter = "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitCallAdapterVersion"
 
     // TESTS
+    assertJ = 'com.squareup.assertj:assertj-android:1.1.1'
     infullMvpTest = "com.infullmobile.android:infullmvp-kotlin-basetest:$mvp_version"
     mockitoKotlin = 'com.nhaarman:mockito-kotlin-kt1.1:1.5.0'
 }

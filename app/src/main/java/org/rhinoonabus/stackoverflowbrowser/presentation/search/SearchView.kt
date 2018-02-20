@@ -2,6 +2,7 @@ package org.rhinoonabus.stackoverflowbrowser.presentation.search
 
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.SearchView
+import android.widget.Toast
 import com.infullmobile.android.infullmvp.PresentedActivityView
 import com.jakewharton.rxbinding2.support.v7.widget.queryTextChanges
 import io.reactivex.Observable
@@ -13,8 +14,8 @@ open class SearchView : PresentedActivityView<SearchPresenter>() {
 
     @LayoutRes
     override val layoutResId = R.layout.activity_search
-
     val searchView: SearchView by bindView(R.id.searchView)
+    val somethingWentWrongText: String by bindString(R.string.general_error)
 
     open val queryTextChanges: Observable<String>
         get() = searchView
@@ -31,9 +32,8 @@ open class SearchView : PresentedActivityView<SearchPresenter>() {
         // NO-OP
     }
 
-    open fun displayError(error: Throwable) {
-        // NO-OP
-    }
+    open fun displayError(error: Throwable) =
+            Toast.makeText(context, somethingWentWrongText, Toast.LENGTH_LONG).show()
 
     companion object {
         const val QUERY_DELAY_TIME_IN_SECONDS = 2L
