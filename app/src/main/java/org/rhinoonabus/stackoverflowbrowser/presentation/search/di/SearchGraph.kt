@@ -6,7 +6,7 @@ import org.rhinoonabus.stackoverflowbrowser.presentation.application.Components
 import org.rhinoonabus.stackoverflowbrowser.presentation.application.StackOverflowBrowserApplicationComponent
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchActivity
 
-class SearchGraph {
+class SearchGraph() {
 
     private val builder = DaggerSearchGraph_SearchComponent
             .builder()

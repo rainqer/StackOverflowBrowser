@@ -36,6 +36,8 @@ dependencies {
     implementation kotlinLib
     implementation rxAppcompat
     implementation rxJava2
+    implementation supportCardView
+    implementation supportRecyclerView
 
     // DI
     implementation dagger

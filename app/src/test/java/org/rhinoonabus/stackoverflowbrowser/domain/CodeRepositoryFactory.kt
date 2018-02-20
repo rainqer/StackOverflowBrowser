@@ -6,4 +6,7 @@ object CodeRepositoryFactory {
 
     val REPOSITORY_A
         get() = CodeRepository(GitHubRepositoryEntityFactory.REPOSITORY_ENTITY_A)
+
+    val REPOSITORY_B
+        get() = CodeRepository(GitHubRepositoryEntityFactory.REPOSITORY_ENTITY_B)
 }

@@ -1,6 +1,7 @@
 package org.rhinoonabus.stackoverflowbrowser.presentation.search
 
 import android.support.annotation.LayoutRes
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.widget.Toast
 import com.infullmobile.android.infullmvp.PresentedActivityView
@@ -10,11 +11,14 @@ import org.rhinoonabus.stackoverflowbrowser.R
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepository
 import java.util.concurrent.TimeUnit
 
-open class SearchView : PresentedActivityView<SearchPresenter>() {
+open class SearchView(
+        private val searchResultsAdapter: SearchResultsAdapter
+) : PresentedActivityView<SearchPresenter>() {
 
     @LayoutRes
     override val layoutResId = R.layout.activity_search
     val searchView: SearchView by bindView(R.id.searchView)
+    val listOfResults: RecyclerView by bindView(R.id.listOfResults)
     val somethingWentWrongText: String by bindString(R.string.general_error)
 
     open val queryTextChanges: Observable<String>
@@ -25,12 +29,10 @@ open class SearchView : PresentedActivityView<SearchPresenter>() {
                 .map { it.toString() }
 
     override fun onViewsBound() {
-        // NO-OP
+        listOfResults.adapter = searchResultsAdapter
     }
 
-    open fun displayResultsForPhrase(results: List<CodeRepository>) {
-        // NO-OP
-    }
+    open fun displayResultsForPhrase(results: List<CodeRepository>) = searchResultsAdapter.setData(results)
 
     open fun displayError(error: Throwable) =
             Toast.makeText(context, somethingWentWrongText, Toast.LENGTH_LONG).show()

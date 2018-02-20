@@ -5,6 +5,7 @@ import dagger.Provides
 import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesWithPhraseUseCase
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchModel
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchPresenter
+import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchResultsAdapter
 import org.rhinoonabus.stackoverflowbrowser.presentation.search.SearchView
 
 @Module
@@ -12,7 +13,11 @@ open class SearchModule {
 
     @SearchScope
     @Provides
-    open fun providesSearchView() = SearchView()
+    open fun providesSearchResultsAdapter() = SearchResultsAdapter()
+
+    @SearchScope
+    @Provides
+    open fun providesSearchView(searchResultsAdapter: SearchResultsAdapter) = SearchView(searchResultsAdapter)
 
     @SearchScope
     @Provides
