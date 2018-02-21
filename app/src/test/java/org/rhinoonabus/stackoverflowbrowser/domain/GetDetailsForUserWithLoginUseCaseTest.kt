@@ -11,6 +11,8 @@ class GetDetailsForUserWithLoginUseCaseTest {
 
     val testScheduler = TestScheduler()
     val mockedSourceCodeManagementRepository = mock<SourceCodeManagementRepository>()
+    val expectedUserDetails = A_USER_DETAILS
+    val expectedNumberOfStarredRepositories = 123
     val getDetailsForUserWithLoginUseCase = GetDetailsForUserWithLoginUseCase(
             testScheduler,
             testScheduler,
@@ -18,11 +20,12 @@ class GetDetailsForUserWithLoginUseCaseTest {
     )
 
     @Test
-    fun shouldGetUserDetailsFromSourceCodeManagementRepository() {
+    fun shouldGetUserDetailsWithNumberOfStarredRepositoriesFromSourceCodeManagementRepository() {
         // given
         val userLogin = "testUserLogin"
-        val expectedResult = A_USER_DETAILS
-        whenever(mockedSourceCodeManagementRepository.getUserDetails(userLogin)).thenReturn(Single.just(expectedResult))
+        whenever(mockedSourceCodeManagementRepository.getUserDetails(userLogin)).thenReturn(Single.just(expectedUserDetails))
+        whenever(mockedSourceCodeManagementRepository.getUserNumberOfRepositoriesStarredByUser(userLogin))
+                .thenReturn(Single.just(expectedNumberOfStarredRepositories))
 
         // when
         val testState = getDetailsForUserWithLoginUseCase.getUserWithLogin(userLogin).test()
@@ -30,7 +33,13 @@ class GetDetailsForUserWithLoginUseCaseTest {
         // then
         testScheduler.triggerActions()
         testState.assertComplete()
-        testState.assertValue(expectedResult)
+        testState.assertValue { result ->
+            result.login == expectedUserDetails.login
+            && result.id == expectedUserDetails.id
+            && result.avatarUrl == expectedUserDetails.avatarUrl
+            && result.numberOfFollowers == expectedUserDetails.numberOfFollowers
+            && result.numberOfStarredRepositories == expectedNumberOfStarredRepositories
+        }
     }
 
     @Test
@@ -39,6 +48,8 @@ class GetDetailsForUserWithLoginUseCaseTest {
         val userLogin = "testUserLogin"
         val error = IllegalStateException("testError")
         whenever(mockedSourceCodeManagementRepository.getUserDetails(userLogin)).thenReturn(Single.error(error))
+        whenever(mockedSourceCodeManagementRepository.getUserNumberOfRepositoriesStarredByUser(userLogin))
+                .thenReturn(Single.just(expectedNumberOfStarredRepositories))
 
         // when
         val testState = getDetailsForUserWithLoginUseCase.getUserWithLogin(userLogin).test()
