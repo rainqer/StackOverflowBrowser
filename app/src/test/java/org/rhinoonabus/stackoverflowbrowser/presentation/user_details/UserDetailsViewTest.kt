@@ -19,7 +19,9 @@ class UserDetailsViewTest : InFullMvpActivityBaseTest<UserDetailsActivity, UserD
     @Test
     fun shouldDisplayUserData() {
         // given
+        val numberOfStarredRepositories = 12
         val testUserDetails = CodeRepositoryUserDetailsFactory.A_USER_DETAILS
+                .copy(numberOfStarredRepositories = numberOfStarredRepositories)
 
         // when
         testedView.displayUserDetails(testUserDetails)
@@ -27,6 +29,7 @@ class UserDetailsViewTest : InFullMvpActivityBaseTest<UserDetailsActivity, UserD
         // then
         assertThat(testedView.userLogin.text).isEqualTo(testUserDetails.login)
         assertThat(testedView.numberOfFollowers.text).isEqualTo(testUserDetails.numberOfFollowers.toString())
+        assertThat(testedView.numberOfStarredRepositories.text).isEqualTo(numberOfStarredRepositories.toString())
     }
 
     override val testActivityClass = UserDetailsActivity::class.java

@@ -15,6 +15,7 @@ open class UserDetailsView : PresentedActivityView<UserDetailsPresenter>() {
 
     val userLogin: TextView by bindView(R.id.userLogin)
     val numberOfFollowers: TextView by bindView(R.id.numberOfFollowers)
+    val numberOfStarredRepositories: TextView by bindView(R.id.numberOfStarredRepositories)
     val userAvatar: ImageView by bindView(R.id.userAvatar)
 
     override fun onViewsBound() {
@@ -24,6 +25,7 @@ open class UserDetailsView : PresentedActivityView<UserDetailsPresenter>() {
     open fun displayUserDetails(userDetails: CodeRepositoryUserDetails) {
         userLogin.text = userDetails.login
         numberOfFollowers.text = userDetails.numberOfFollowers.toString()
+        numberOfStarredRepositories.text = userDetails.numberOfStarredRepositories.toString()
         Picasso.with(context).load(userDetails.avatarUrl).into(userAvatar)
     }
 }
