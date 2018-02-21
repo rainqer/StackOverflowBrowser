@@ -25,4 +25,8 @@ interface GitHubApiClient {
     @Headers("Accept: application/vnd.github.v3+json", "Content-Type: application/json")
     @GET("users/{login}")
     fun getUserDetails(@Path("login") userLogin: String): Single<GitHubUserDetailsResponseEntity>
+
+    @Headers("Accept: application/vnd.github.v3+json", "Content-Type: application/json")
+    @GET("users/{login}/starred")
+    fun getUserStarredRepositories(@Path("login") userLogin: String): Single<List<GitHubRepositoryEntity>>
 }

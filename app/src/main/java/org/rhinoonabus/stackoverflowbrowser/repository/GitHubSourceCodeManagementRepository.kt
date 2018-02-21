@@ -27,6 +27,10 @@ class GitHubSourceCodeManagementRepository(
             gitHubClient.getUserDetails(userLogin)
                     .map { CodeRepositoryUserDetails(it) }
 
+    override fun getUserNumberOfRepositoriesStarredByUser(userLogin: String): Single<Int> =
+            gitHubClient.getUserStarredRepositories(userLogin)
+                    .map { listOfStarredRepositories -> listOfStarredRepositories.size }
+
     companion object {
         const val RESULTS_PER_PAGE = 10
     }
