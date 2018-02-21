@@ -1,5 +1,6 @@
 package org.rhinoonabus.stackoverflowbrowser.presentation.search
 
+import android.app.Activity
 import android.view.LayoutInflater
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -7,11 +8,16 @@ import org.junit.runner.RunWith
 import org.rhinoonabus.stackoverflowbrowser.R
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryFactory.REPOSITORY_A
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryUserFactory.USER_A
+import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.UserDetailsActivity
+import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import org.robolectric.Shadows
 
 @RunWith(RobolectricTestRunner::class)
 class SearchResultViewHolderTest {
+
+    private val activity = Robolectric.setupActivity(Activity::class.java)
 
     @Test
     fun shouldBindCodeRepositoryDataToFields() {
@@ -43,10 +49,43 @@ class SearchResultViewHolderTest {
         assertThat(viewHolder.itemUrl.text).isEqualTo(codeRepositoryUserToBind.url)
     }
 
+    @Test
+    fun shouldStartUserDetailsActivityIfViewHolderBoundToUser() {
+        // given
+        val codeRepositoryUserToBind = USER_A
+        val viewHolder = buildViewHolder()
+        viewHolder.bind(codeRepositoryUserToBind)
+
+        // when
+        viewHolder.itemView.performClick()
+
+        // then
+        checkIfActivityStarted(UserDetailsActivity::class.java)
+    }
+
+    @Test
+    fun shouldNotStartAnyActivityIfViewHolderBoundToRepository() {
+        // given
+        val codeRepositoryUserToBind = REPOSITORY_A
+        val viewHolder = buildViewHolder()
+        viewHolder.bind(codeRepositoryUserToBind)
+
+        // when
+        viewHolder.itemView.performClick()
+
+        // then
+        assertThat(Shadows.shadowOf(activity).nextStartedActivity).isNull()
+    }
+
     private fun buildViewHolder() = SearchResultViewHolder(inflateViewForViewHolder())
 
     private fun inflateViewForViewHolder() =
-            LayoutInflater.from(RuntimeEnvironment.application).inflate(R.layout.search_result_view_holder, null, false)
+            LayoutInflater.from(activity).inflate(R.layout.search_result_view_holder, null, false)
 
     private fun getString(stringRes: Int) = RuntimeEnvironment.application.getString(stringRes)
+
+    private fun checkIfActivityStarted(activityClass: Class<out Activity>) {
+        val intent = Shadows.shadowOf(activity).nextStartedActivity
+        assertThat(intent.component.className).isEqualTo(activityClass.name)
+    }
 }
