@@ -3,6 +3,7 @@ package org.rhinoonabus.stackoverflowbrowser.repository
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GitHubApiClient {
@@ -20,4 +21,8 @@ interface GitHubApiClient {
             @Query("q") queryPhrase: String,
             @Query("per_page") resultsOnPage: Int
     ): Single<GitHubSearchForRepositoryUsersResponseEntity>
+
+    @Headers("Accept: application/vnd.github.v3+json", "Content-Type: application/json")
+    @GET("users/{login}")
+    fun getUserDetails(@Path("login") userLogin: String): Single<GitHubUserDetailsResponseEntity>
 }

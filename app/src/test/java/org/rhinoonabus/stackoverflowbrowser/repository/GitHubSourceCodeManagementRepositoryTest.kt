@@ -29,9 +29,9 @@ class GitHubSourceCodeManagementRepositoryTest {
         val expectedEntity = expectedResultEntity.items?.get(0)
         testedState.assertValue { resultListOfRepositories ->
             resultListOfRepositories[0].id == expectedEntity?.id
-            && resultListOfRepositories[0].name == expectedEntity.name
-            && resultListOfRepositories[0].description == expectedEntity.description
-            && resultListOfRepositories[0].url == expectedEntity.url
+                    && resultListOfRepositories[0].name == expectedEntity.name
+                    && resultListOfRepositories[0].description == expectedEntity.description
+                    && resultListOfRepositories[0].url == expectedEntity.url
         }
     }
 
@@ -49,7 +49,9 @@ class GitHubSourceCodeManagementRepositoryTest {
         // then
         testedState.assertError(error)
 
-    }@Test
+    }
+
+    @Test
     fun shouldReturnListOfMappedCodeRepositoryUsers() {
         // given
         val testPhrase = "testPhrase"
@@ -65,8 +67,8 @@ class GitHubSourceCodeManagementRepositoryTest {
         val expectedEntity = expectedResultEntity.items?.get(0)
         testedState.assertValue { resultListOfRepositoryUsers ->
             resultListOfRepositoryUsers[0].id == expectedEntity?.id
-            && resultListOfRepositoryUsers[0].name == expectedEntity.name
-            && resultListOfRepositoryUsers[0].url == expectedEntity.url
+                    && resultListOfRepositoryUsers[0].name == expectedEntity.name
+                    && resultListOfRepositoryUsers[0].url == expectedEntity.url
         }
     }
 
@@ -80,6 +82,42 @@ class GitHubSourceCodeManagementRepositoryTest {
 
         // when
         val testedState = gitHubSourceCodeManagementRepository.searchUsers(testPhrase).test()
+
+        // then
+        testedState.assertError(error)
+    }
+
+    @Test
+    fun shouldReturnUserDetailsFromGithubClient() {
+        // given
+        val userLogin = "userLogin"
+        val expectedResponse = GitHubUserDetailsResponseEntityFactory.A_RESPONSE
+        whenever(mockedGitHubClient.getUserDetails(userLogin))
+                .thenReturn(Single.just(expectedResponse))
+
+        // when
+        val testedState = gitHubSourceCodeManagementRepository.getUserDetails(userLogin).test()
+
+        // then
+        testedState.assertComplete()
+        testedState.assertValue { value ->
+            value.id == expectedResponse.id
+                    && value.login == expectedResponse.login
+                    && value.avatarUrl == expectedResponse.avatarUrl
+                    && value.followers == expectedResponse.followers
+        }
+    }
+
+    @Test
+    fun shouldReturnErrorWhenGettingUserDetailsFromGithubClientReturnsError() {
+        // given
+        val error = IllegalStateException("testError")
+        val userLogin = "userLogin"
+        whenever(mockedGitHubClient.getUserDetails(userLogin))
+                .thenReturn(Single.error(error))
+
+        // when
+        val testedState = gitHubSourceCodeManagementRepository.getUserDetails(userLogin).test()
 
         // then
         testedState.assertError(error)
