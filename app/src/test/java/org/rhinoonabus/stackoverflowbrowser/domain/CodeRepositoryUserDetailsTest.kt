@@ -18,6 +18,6 @@ class CodeRepositoryUserDetailsTest {
         assertThat(parsedUserDetails.id).isEqualTo(entityToParse.id)
         assertThat(parsedUserDetails.login).isEqualTo(entityToParse.login)
         assertThat(parsedUserDetails.avatarUrl).isEqualTo(entityToParse.avatarUrl)
-        assertThat(parsedUserDetails.followers).isEqualTo(entityToParse.followers)
+        assertThat(parsedUserDetails.numberOfFollowers).isEqualTo(entityToParse.followers)
     }
 }

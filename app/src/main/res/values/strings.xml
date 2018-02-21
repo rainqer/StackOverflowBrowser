@@ -4,6 +4,7 @@
     <string name="type_label">type:</string>
     <string name="name_label">name:</string>
     <string name="url_label">url:</string>
-    <string name="codeRepositoryTypeName">Repository</string>
-    <string name="codeRepositoryUserTypeName">User</string>
+    <string name="number_of_followers_label">followers: </string>
+    <string name="code_repository_type_name">Repository</string>
+    <string name="code_repository_user_type_name">User</string>
 </resources>

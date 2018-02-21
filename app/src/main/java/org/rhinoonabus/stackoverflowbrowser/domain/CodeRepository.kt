@@ -8,7 +8,7 @@ data class CodeRepository(
         override val name: String,
         override val url: String,
         val description: String,
-        override val typeNameRes: Int = R.string.codeRepositoryTypeName
+        override val typeNameRes: Int = R.string.code_repository_type_name
 ) : SearchResultItem {
 
     constructor(gitHubCodeRepositoryEntity: GitHubRepositoryEntity) : this(

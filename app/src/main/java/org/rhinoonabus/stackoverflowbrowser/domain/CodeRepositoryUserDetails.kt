@@ -6,7 +6,7 @@ data class CodeRepositoryUserDetails(
         val id: Long,
         val login: String,
         val avatarUrl: String,
-        val followers: Int
+        val numberOfFollowers: Int
 ) {
 
     constructor(userDetailsEntity: GitHubUserDetailsResponseEntity) : this(

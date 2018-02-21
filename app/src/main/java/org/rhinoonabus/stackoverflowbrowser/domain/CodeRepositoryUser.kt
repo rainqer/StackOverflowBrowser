@@ -7,7 +7,7 @@ data class CodeRepositoryUser(
         override val id: Long,
         override val name: String,
         override val url: String,
-        override val typeNameRes: Int = R.string.codeRepositoryUserTypeName
+        override val typeNameRes: Int = R.string.code_repository_user_type_name
 
 ) : SearchResultItem {
 

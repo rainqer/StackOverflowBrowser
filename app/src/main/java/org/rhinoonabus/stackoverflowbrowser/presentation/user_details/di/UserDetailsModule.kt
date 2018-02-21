@@ -8,19 +8,20 @@ import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.UserDetail
 import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.UserDetailsView
 
 @Module
-class UserDetailsModule {
+open class UserDetailsModule {
 
     @UserDetailsScope
     @Provides
-    internal fun providesUserDetailsView() = UserDetailsView()
+    open fun providesUserDetailsView() = UserDetailsView()
 
     @UserDetailsScope
     @Provides
-    internal fun providesUserDetailsModel(
+    open fun providesUserDetailsModel(
             getDetailsForUserWithLoginUseCase: GetDetailsForUserWithLoginUseCase
     ) = UserDetailsModel(getDetailsForUserWithLoginUseCase)
 
     @UserDetailsScope
     @Provides
-    fun providesUserDetailsPresenter(view: UserDetailsView, model: UserDetailsModel) = UserDetailsPresenter(view, model)
+    open fun providesUserDetailsPresenter(view: UserDetailsView, model: UserDetailsModel) =
+            UserDetailsPresenter(view, model)
 }

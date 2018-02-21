@@ -31,7 +31,7 @@ class SearchResultViewHolderTest {
         viewHolder.bind(codeRepositoryToBind)
 
         // then
-        assertThat(viewHolder.itemType.text).isEqualTo(getString(R.string.codeRepositoryTypeName))
+        assertThat(viewHolder.itemType.text).isEqualTo(getString(R.string.code_repository_type_name))
         assertThat(viewHolder.itemName.text).isEqualTo(codeRepositoryToBind.name)
         assertThat(viewHolder.itemUrl.text).isEqualTo(codeRepositoryToBind.url)
     }
@@ -46,7 +46,7 @@ class SearchResultViewHolderTest {
         viewHolder.bind(codeRepositoryUserToBind)
 
         // then
-        assertThat(viewHolder.itemType.text).isEqualTo(getString(R.string.codeRepositoryUserTypeName))
+        assertThat(viewHolder.itemType.text).isEqualTo(getString(R.string.code_repository_user_type_name))
         assertThat(viewHolder.itemName.text).isEqualTo(codeRepositoryUserToBind.name)
         assertThat(viewHolder.itemUrl.text).isEqualTo(codeRepositoryUserToBind.url)
     }

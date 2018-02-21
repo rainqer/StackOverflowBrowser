@@ -34,6 +34,7 @@ dependencies {
     implementation appcompat
     implementation infullMvp
     implementation kotlinLib
+    implementation picasso
     implementation rxAppcompat
     implementation rxJava2
     implementation supportCardView

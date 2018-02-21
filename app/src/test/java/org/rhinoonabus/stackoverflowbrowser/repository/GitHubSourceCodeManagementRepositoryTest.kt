@@ -104,7 +104,7 @@ class GitHubSourceCodeManagementRepositoryTest {
             value.id == expectedResponse.id
                     && value.login == expectedResponse.login
                     && value.avatarUrl == expectedResponse.avatarUrl
-                    && value.followers == expectedResponse.followers
+                    && value.numberOfFollowers == expectedResponse.followers
         }
     }
 
