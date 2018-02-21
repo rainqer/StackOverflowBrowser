@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import org.rhinoonabus.stackoverflowbrowser.domain.GetDetailsForUserWithLoginUseCase
 import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesOrUsersWithPhraseUseCase
 import org.rhinoonabus.stackoverflowbrowser.domain.SourceCodeManagementRepository
 
@@ -15,5 +16,17 @@ class UseCasesModule {
 
     @Provides
     fun providesSearchForRepositoriesWithPhraseUseCase(sourceCodeManagementRepository: SourceCodeManagementRepository) =
-            SearchForRepositoriesOrUsersWithPhraseUseCase(ioScheduler, mainThreadScheduler, sourceCodeManagementRepository)
+            SearchForRepositoriesOrUsersWithPhraseUseCase(
+                    ioScheduler,
+                    mainThreadScheduler,
+                    sourceCodeManagementRepository
+            )
+
+    @Provides
+    fun providesGetDetailsForUserWithLoginUseCase(sourceCodeManagementRepository: SourceCodeManagementRepository) =
+            GetDetailsForUserWithLoginUseCase(
+                    ioScheduler,
+                    mainThreadScheduler,
+                    sourceCodeManagementRepository
+            )
 }

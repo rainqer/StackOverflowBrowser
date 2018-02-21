@@ -1,6 +1,7 @@
 package org.rhinoonabus.stackoverflowbrowser.presentation.application
 
 import dagger.Component
+import org.rhinoonabus.stackoverflowbrowser.domain.GetDetailsForUserWithLoginUseCase
 import org.rhinoonabus.stackoverflowbrowser.domain.SearchForRepositoriesOrUsersWithPhraseUseCase
 import javax.inject.Singleton
 
@@ -9,4 +10,5 @@ import javax.inject.Singleton
 interface StackOverflowBrowserApplicationComponent {
 
     fun providesSearchForRepositoriesWithPhraseUseCase(): SearchForRepositoriesOrUsersWithPhraseUseCase
+    fun providesGetDetailsForUserWithLoginUseCase(): GetDetailsForUserWithLoginUseCase
 }
