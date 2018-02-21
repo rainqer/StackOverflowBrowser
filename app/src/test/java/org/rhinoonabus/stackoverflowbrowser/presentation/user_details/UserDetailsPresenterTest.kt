@@ -21,12 +21,25 @@ class UserDetailsPresenterTest {
     fun shouldDownloadUserDetailsAndDisplayDelegateThemToView() {
         // given
         val downloadedUser = CodeRepositoryUserDetailsFactory.A_USER_DETAILS
-        whenever(mockedUserDetailsModel.getDetailsForUser("android")).thenReturn(Single.just(downloadedUser))
+        val userLogin = "userLogin"
+        whenever(mockedUserDetailsModel.getDetailsForUser(userLogin)).thenReturn(Single.just(downloadedUser))
 
         // when
-        presenter.bind(Bundle(), Bundle(), null)
+        presenter.bind(getBundleWithUserLogin(userLogin), Bundle(), null)
 
         // then
         verify(mockedUserDetailsView).displayUserDetails(downloadedUser)
     }
+
+    @Test(expected = IllegalStateException::class)
+    fun shouldThrowErrorWhenTryingToBindPresenterWithoutProvidingProperUserLogin() {
+        // given
+        val intentBundleWithoutUserLogin = Bundle()
+
+        // when
+        presenter.bind(intentBundleWithoutUserLogin, Bundle(), null)
+    }
+
+    private fun getBundleWithUserLogin(userLogin: String) =
+            Bundle().apply { putString(UserDetailsPresenter.USER_LOGIN_KEY, userLogin) }
 }

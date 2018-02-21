@@ -10,7 +10,15 @@ open class UserDetailsPresenter(
 ) : Presenter<UserDetailsView>(view) {
 
     override fun bind(intentBundle: Bundle, savedInstanceState: Bundle, intentData: Uri?) {
-        model.getDetailsForUser("android")
+        model.getDetailsForUser(extractUserIdFromBundle(intentBundle))
                 .subscribe { userDetails -> presentedView.displayUserDetails(userDetails) }
+    }
+
+    private fun extractUserIdFromBundle(intentBundle: Bundle) =
+            intentBundle.getString(USER_LOGIN_KEY)
+                    ?: throw IllegalStateException("Cannot display details for a user id")
+
+    companion object {
+        const val USER_LOGIN_KEY = "userLoginKey"
     }
 }

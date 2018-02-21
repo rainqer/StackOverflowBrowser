@@ -3,6 +3,7 @@ package org.rhinoonabus.stackoverflowbrowser.presentation.user_details
 import android.content.Context
 import android.content.Intent
 import com.infullmobile.android.infullmvp.InFullMvpActivity
+import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.UserDetailsPresenter.Companion.USER_LOGIN_KEY
 import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.di.UserDetailsGraph
 import javax.inject.Inject
 
@@ -20,6 +21,7 @@ class UserDetailsActivity : InFullMvpActivity<UserDetailsPresenter, UserDetailsV
     override fun injectIntoGraph() = userDetailsGraph.inject(this)
 
     companion object {
-        fun getIntent(context: Context) = Intent(context, UserDetailsActivity::class.java)
+        fun getIntent(context: Context, userLogin: String): Intent =
+                Intent(context, UserDetailsActivity::class.java).putExtra(USER_LOGIN_KEY, userLogin)
     }
 }

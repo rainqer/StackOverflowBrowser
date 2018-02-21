@@ -1,6 +1,7 @@
 package org.rhinoonabus.stackoverflowbrowser.presentation.search
 
 import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -9,6 +10,7 @@ import org.rhinoonabus.stackoverflowbrowser.R
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryFactory.REPOSITORY_A
 import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryUserFactory.USER_A
 import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.UserDetailsActivity
+import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.UserDetailsPresenter
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
@@ -50,7 +52,7 @@ class SearchResultViewHolderTest {
     }
 
     @Test
-    fun shouldStartUserDetailsActivityIfViewHolderBoundToUser() {
+    fun shouldStartUserDetailsActivityForUserNameIfViewHolderBoundToUser() {
         // given
         val codeRepositoryUserToBind = USER_A
         val viewHolder = buildViewHolder()
@@ -60,7 +62,8 @@ class SearchResultViewHolderTest {
         viewHolder.itemView.performClick()
 
         // then
-        checkIfActivityStarted(UserDetailsActivity::class.java)
+        val startedIntent = checkIfActivityStarted(UserDetailsActivity::class.java)
+        assertThat(startedIntent.getStringExtra(UserDetailsPresenter.USER_LOGIN_KEY)).isEqualTo(USER_A.name)
     }
 
     @Test
@@ -84,8 +87,9 @@ class SearchResultViewHolderTest {
 
     private fun getString(stringRes: Int) = RuntimeEnvironment.application.getString(stringRes)
 
-    private fun checkIfActivityStarted(activityClass: Class<out Activity>) {
+    private fun checkIfActivityStarted(activityClass: Class<out Activity>): Intent {
         val intent = Shadows.shadowOf(activity).nextStartedActivity
         assertThat(intent.component.className).isEqualTo(activityClass.name)
+        return intent
     }
 }

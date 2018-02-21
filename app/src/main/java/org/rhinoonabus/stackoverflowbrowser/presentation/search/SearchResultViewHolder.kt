@@ -9,7 +9,7 @@ import org.rhinoonabus.stackoverflowbrowser.domain.CodeRepositoryUser
 import org.rhinoonabus.stackoverflowbrowser.domain.SearchResultItem
 import org.rhinoonabus.stackoverflowbrowser.presentation.user_details.UserDetailsActivity
 
-open class SearchResultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+open class SearchResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val itemType: TextView by bindView(R.id.itemType)
     val itemName: TextView by bindView(R.id.itemName)
@@ -23,9 +23,9 @@ open class SearchResultViewHolder(itemView: View): RecyclerView.ViewHolder(itemV
     }
 
     private fun getOnClickListenerBasingOnItemType(item: SearchResultItem) =
-        item.takeIf { it is CodeRepositoryUser }
-                ?.let { View.OnClickListener { startUserDetailsScreenForId() } }
+            item.takeIf { it is CodeRepositoryUser }
+                    ?.let { View.OnClickListener { startUserDetailsScreenForLogin(item.name) } }
 
-    private fun startUserDetailsScreenForId() =
-            itemView.context.startActivity(UserDetailsActivity.getIntent(itemView.context))
+    private fun startUserDetailsScreenForLogin(userLogin: String) =
+            itemView.context.startActivity(UserDetailsActivity.getIntent(itemView.context, userLogin))
 }
