@@ -5,10 +5,12 @@ import android.os.Bundle
 import com.infullmobile.android.infullmvp.Presenter
 
 open class UserDetailsPresenter(
-        view: UserDetailsView
+        view: UserDetailsView,
+        private val model: UserDetailsModel
 ) : Presenter<UserDetailsView>(view) {
 
     override fun bind(intentBundle: Bundle, savedInstanceState: Bundle, intentData: Uri?) {
-        // NO-OP
+        model.getDetailsForUser("android")
+                .subscribe { userDetails -> presentedView.displayUserDetails(userDetails) }
     }
 }
