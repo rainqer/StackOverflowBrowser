@@ -67,7 +67,7 @@ class GitHubSourceCodeManagementRepositoryTest {
         val expectedEntity = expectedResultEntity.items?.get(0)
         testedState.assertValue { resultListOfRepositoryUsers ->
             resultListOfRepositoryUsers[0].id == expectedEntity?.id
-                    && resultListOfRepositoryUsers[0].name == expectedEntity.name
+                    && resultListOfRepositoryUsers[0].name == expectedEntity.userLogin
                     && resultListOfRepositoryUsers[0].url == expectedEntity.url
         }
     }

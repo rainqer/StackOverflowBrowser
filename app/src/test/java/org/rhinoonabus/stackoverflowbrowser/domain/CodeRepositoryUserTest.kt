@@ -16,7 +16,7 @@ class CodeRepositoryUserTest {
 
         // then
         assertThat(createdRepositoryUser.id).isEqualTo(repositoryUserEntity.id)
-        assertThat(createdRepositoryUser.name).isEqualTo(repositoryUserEntity.name)
+        assertThat(createdRepositoryUser.name).isEqualTo(repositoryUserEntity.userLogin)
         assertThat(createdRepositoryUser.url).isEqualTo(repositoryUserEntity.url)
     }
 }

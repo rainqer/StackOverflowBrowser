@@ -13,7 +13,7 @@ data class CodeRepositoryUser(
 
     constructor(gitHubCodeUserEntity: GitHubUserEntity) : this(
             gitHubCodeUserEntity.id ?: throw IllegalStateException("Every user must have an id"),
-            gitHubCodeUserEntity.name ?: "",
+            gitHubCodeUserEntity.userLogin ?: "",
             gitHubCodeUserEntity.url ?: ""
     )
 }
