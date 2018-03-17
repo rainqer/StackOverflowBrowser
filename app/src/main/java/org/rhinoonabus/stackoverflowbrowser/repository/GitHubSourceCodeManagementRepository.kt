@@ -13,9 +13,7 @@ class GitHubSourceCodeManagementRepository(
 
     override fun searchForCodeRepositories(searchPhrase: String): Single<List<CodeRepository>> =
             gitHubClient.searchForRepositories(searchPhrase, RESULTS_PER_PAGE)
-                    .flatMapObservable { Observable.fromIterable(it.items) }
-                    .map { CodeRepository(it) }
-                    .toList()
+                    .map { it.items?.map { CodeRepository(it) } ?: emptyList() }
 
     override fun searchUsers(searchPhrase: String): Single<List<CodeRepositoryUser>> =
             gitHubClient.searchForUsers(searchPhrase, RESULTS_PER_PAGE)
