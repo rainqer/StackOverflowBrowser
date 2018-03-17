@@ -2,16 +2,17 @@ package org.rhinoonabus.stackoverflowbrowser.presentation.user_details
 
 import android.net.Uri
 import android.os.Bundle
-import com.infullmobile.android.infullmvp.Presenter
+import org.rhinoonabus.stackoverflowbrowser.presentation.RxPresenter
 
 open class UserDetailsPresenter(
         view: UserDetailsView,
         private val model: UserDetailsModel
-) : Presenter<UserDetailsView>(view) {
+) : RxPresenter<UserDetailsView>(view) {
 
     override fun bind(intentBundle: Bundle, savedInstanceState: Bundle, intentData: Uri?) {
         model.getDetailsForUser(extractUserIdFromBundle(intentBundle))
                 .subscribe { userDetails -> presentedView.displayUserDetails(userDetails) }
+                .register()
     }
 
     private fun extractUserIdFromBundle(intentBundle: Bundle) =

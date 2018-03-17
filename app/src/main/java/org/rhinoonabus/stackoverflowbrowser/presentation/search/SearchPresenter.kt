@@ -2,12 +2,12 @@ package org.rhinoonabus.stackoverflowbrowser.presentation.search
 
 import android.net.Uri
 import android.os.Bundle
-import com.infullmobile.android.infullmvp.Presenter
+import org.rhinoonabus.stackoverflowbrowser.presentation.RxPresenter
 
 open class SearchPresenter(
         view: SearchView,
         private val model: SearchModel
-) : Presenter<SearchView>(view) {
+) : RxPresenter<SearchView>(view) {
 
     override fun bind(intentBundle: Bundle, savedInstanceState: Bundle, intentData: Uri?) {
         presentedView.queryTextChanges
@@ -15,6 +15,6 @@ open class SearchPresenter(
                 .subscribe (
                         { results -> presentedView.displayResultsForPhrase(results) },
                         { error -> presentedView.displayError(error) }
-                )
+                ).register()
     }
 }
