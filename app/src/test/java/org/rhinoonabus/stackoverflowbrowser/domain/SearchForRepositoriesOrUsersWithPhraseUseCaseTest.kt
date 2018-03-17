@@ -46,6 +46,22 @@ class SearchForRepositoriesOrUsersWithPhraseUseCaseTest {
     }
 
     @Test
+    fun shouldReturnEmptyListForEmptyPhrase() {
+        // given
+        val emptySearchPhrase = ""
+
+        // when
+        val testedState = useCase.searchFor(emptySearchPhrase).test()
+
+        // then
+        testScheduler.triggerActions()
+        testedState.awaitTerminalEvent()
+        testedState.assertValue { result ->
+            result.isEmpty()
+        }
+    }
+
+    @Test
     fun shouldGiveTheSearchResultsSortedByIdInAscendingOrder() {
         // given
         val listOfMixedRepositories =
